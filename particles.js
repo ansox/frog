@@ -28,6 +28,26 @@ class Particle {
       this.radius -= 0.14;
     }
   }
+
+  rippleUpdate() {
+    if (this.radius < 50) {
+      this.radius += 0.7;
+      this.x -= 0.03;
+      this.y -= 0.03;
+
+      if (this.opacity > 0) {
+        this.opacity -= 0.0;
+      }
+    }
+  }
+
+  rippleDraw() {
+     ctx1.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+    ctx1.beginPath();
+    ctx1.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx1.stroke();
+    ctx1.closePath();
+  }
 }
 
 function handleParticles() {
@@ -47,6 +67,28 @@ function handleParticles() {
   { 
     for (let i = 0; i < 10; i++) {
       particlesArray.unshift(new Particle(frogger.x, frogger.y));
+    }
+  }  
+
+}
+
+function handleRipples() {
+ for (let i = 0; i < ripplesArray.length; i++) {
+    ripplesArray[i].rippleUpdate();
+    ripplesArray[i].rippleDraw();
+  }
+
+  if (particlesArray.length > 20) {
+    for(let i = 0; i < 5; i++) {
+      ripplesArray.pop();
+    }
+  }
+
+  if ((keys['ArrowUp'] || keys['ArrowDown'] || keys['ArrowLeft'] || keys['ArrowRight']) &&
+    frogger.y < 250 && frogger.y > 100) 
+  { 
+    for (let i = 0; i < 20; i++) {
+      ripplesArray.unshift(new Particle(frogger.x, frogger.y));
     }
   }
 }
