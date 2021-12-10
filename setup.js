@@ -43,3 +43,17 @@ background_lvl2.src = './images/background_lvl2.png';
 
 const grass = new Image();
 grass.src = './images/grass.png';
+
+const collisions = new Image();
+collisions.src = './images/collisions.png';
+
+const turtle = new Image();
+turtle.src = './images/turtles.png';
+
+const log = new Image();
+log.src = './images/log.png';
+
+const car = new Image();
+car.src = './images/cars.png';
+
+let numberOfCars = 30;
